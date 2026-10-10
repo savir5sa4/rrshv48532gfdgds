@@ -3,213 +3,427 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>نمی‌دونم چیه والا 🤔</title>
+<title>نمیدونم چیه والا 🤔</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
-body{font-family:'Vazirmatn',system-ui,sans-serif;background:#07030f;color:#fff;direction:rtl}
+body{font-family:'Vazirmatn',system-ui,sans-serif;background:#1a0505;color:#fff;direction:rtl}
 
+/* ============ BACKGROUND: کاخ ایرانی ============ */
 #bg{position:fixed;inset:0;z-index:0;
   background:
-    radial-gradient(circle at 18% 18%, rgba(120,30,120,.55) 0%, transparent 55%),
-    radial-gradient(circle at 82% 72%, rgba(60,20,140,.55) 0%, transparent 55%),
-    radial-gradient(circle at 50% 105%, rgba(160,30,90,.5) 0%, transparent 60%),
-    linear-gradient(160deg,#0a0416,#150826 45%,#0a0416);
+    radial-gradient(circle at 15% 20%, rgba(180,30,40,.55) 0%, transparent 55%),
+    radial-gradient(circle at 85% 80%, rgba(120,60,20,.55) 0%, transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(200,140,40,.25) 0%, transparent 70%),
+    linear-gradient(160deg,#1a0505,#3a0d0d 40%,#2a0808 70%,#0f0303);
   animation:bgShift 20s ease-in-out infinite alternate}
-@keyframes bgShift{0%{filter:hue-rotate(0) brightness(1)}100%{filter:hue-rotate(28deg) brightness(1.15)}}
-#stars{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-.star-dot{position:absolute;background:#fff;border-radius:50%;animation:twinkle 3s ease-in-out infinite}
-@keyframes twinkle{0%,100%{opacity:.12;transform:scale(.6)}50%{opacity:.95;transform:scale(1.25)}}
+@keyframes bgShift{0%{filter:hue-rotate(0) brightness(1)}100%{filter:hue-rotate(-8deg) brightness(1.12)}}
 
+/* نقوش اسلیمی */
+#patterns{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.14}
+.pat{position:absolute;font-size:32vmin;color:#ffd970;
+  animation:patRotate 60s linear infinite;filter:blur(.5px)}
+@keyframes patRotate{0%{transform:rotate(0) scale(1)}100%{transform:rotate(360deg) scale(1.1)}}
+
+#stars{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.star-dot{position:absolute;background:#ffd970;border-radius:50%;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1.3)}}
+
+/* ============ GATES ============ */
 .gate{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:26px 16px;opacity:0;pointer-events:none;transform:scale(.93) translateY(14px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,1.1,.35,1);overflow-y:auto}
 .gate.active{opacity:1;pointer-events:auto;transform:scale(1) translateY(0)}
-.gate-inner{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:28px;padding:32px 22px 28px;max-width:520px;width:100%;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.16);position:relative;overflow:hidden;margin:auto}
-.g-title{font-size:clamp(1.2rem,4.6vw,1.7rem);font-weight:900;margin:14px 0 8px;line-height:1.6;background:linear-gradient(180deg,#fff,#ffc9e2);-webkit-background-clip:text;background-clip:text;color:transparent}
-.g-sub{font-size:clamp(.85rem,3.4vw,1rem);color:rgba(255,255,255,.78);line-height:2;margin:8px 0 18px}
-.g-hint{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:16px;min-height:1.2em;transition:color .3s}
-.g-hint.warn{color:#ffb3c9}.g-hint.ok{color:#8ef0c0}
+.gate-inner{
+  background:linear-gradient(160deg,rgba(60,10,10,.75),rgba(40,5,5,.85));
+  border:1.5px solid rgba(255,215,120,.45);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-radius:30px;padding:36px 26px 32px;max-width:540px;width:100%;text-align:center;
+  box-shadow:0 30px 90px rgba(0,0,0,.85),
+             inset 0 1px 0 rgba(255,215,120,.35),
+             0 0 60px rgba(255,180,60,.15);
+  position:relative;overflow:hidden;margin:auto}
+.gate-inner::before{content:'';position:absolute;inset:8px;border:1px solid rgba(255,215,120,.18);border-radius:22px;pointer-events:none}
+.gate-inner::after{content:'❁';position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  color:rgba(255,215,120,.55);font-size:1rem;background:linear-gradient(90deg,transparent,#3a0d0d 30%,#3a0d0d 70%,transparent);padding:0 12px}
 
-.btn{font-family:inherit;font-size:clamp(.9rem,3.4vw,1rem);font-weight:700;padding:13px 26px;border-radius:50px;border:none;cursor:pointer;background:linear-gradient(135deg,#ff7ab8,#ff3d86);color:#fff;margin:5px;box-shadow:0 10px 34px rgba(255,61,134,.42),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .25s cubic-bezier(.2,1.5,.4,1),box-shadow .25s}
-.btn:hover{transform:translateY(-3px) scale(1.045);box-shadow:0 16px 46px rgba(255,61,134,.62)}
-.btn:active{transform:scale(.96)}
-.btn.ghost{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);box-shadow:none}
-.btn.ghost:hover{background:rgba(255,255,255,.14)}
-.btn.big{font-size:1.1rem;padding:16px 36px}
+.g-title{font-size:clamp(1.25rem,4.8vw,1.75rem);font-weight:900;margin:14px 0 8px;line-height:1.6;
+  background:linear-gradient(180deg,#fff2c9,#ffd970 45%,#e0a030);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 16px rgba(255,200,80,.6))}
+.g-sub{font-size:clamp(.88rem,3.4vw,1rem);color:rgba(255,230,190,.82);line-height:2;margin:8px 0 18px}
+.g-hint{font-size:.78rem;color:rgba(255,215,140,.5);margin-top:16px;min-height:1.2em;transition:color .3s}
+.g-hint.warn{color:#ff9ec2}.g-hint.ok{color:#ffe9a8}
+
+.btn{font-family:inherit;font-size:clamp(.9rem,3.4vw,1rem);font-weight:700;padding:13px 30px;border-radius:50px;
+  border:1.5px solid rgba(255,215,120,.6);cursor:pointer;
+  background:linear-gradient(135deg,#e8a530,#c07810);
+  color:#2a0a00;margin:5px;
+  box-shadow:0 10px 34px rgba(200,130,30,.5),inset 0 1px 0 rgba(255,240,190,.6),0 0 30px rgba(255,180,60,.25);
+  transition:transform .25s cubic-bezier(.2,1.5,.4,1),box-shadow .25s}
+.btn:hover{transform:translateY(-3px) scale(1.045);box-shadow:0 16px 46px rgba(200,130,30,.7),0 0 50px rgba(255,200,90,.5)}.btn:active{transform:scale(.96)}
+.btn.ghost{background:rgba(255,215,120,.06);border:1px solid rgba(255,215,120,.35);color:#ffd970;box-shadow:none}
+.btn.ghost:hover{background:rgba(255,215,120,.15)}
+.btn.big{font-size:1.1rem;padding:16px 40px}
 .btn-row{display:flex;justify-content:center;flex-wrap:wrap;gap:6px}
 
-.gift-emoji{font-size:clamp(3.8rem,18vw,5.4rem);line-height:1;animation:floaty 3s ease-in-out infinite;filter:drop-shadow(0 12px 30px rgba(255,120,180,.7))}
-@keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
-.name-badge{display:inline-block;margin:10px 0 20px;padding:9px 30px;border-radius:99px;font-size:clamp(1.15rem,5vw,1.5rem);font-weight:900;letter-spacing:1px;background:linear-gradient(135deg,rgba(255,120,180,.28),rgba(255,215,106,.28));border:1px solid rgba(255,215,106,.55);color:#ffe9a8;box-shadow:0 0 34px rgba(255,200,110,.35),inset 0 0 22px rgba(255,200,110,.15);animation:badgeGlow 2.6s ease-in-out infinite}
-@keyframes badgeGlow{0%,100%{box-shadow:0 0 24px rgba(255,200,110,.28)}50%{box-shadow:0 0 50px rgba(255,200,110,.6)}}
+/* ============ GATE 1: جعبه طلایی ============ */
+.gold-box{position:relative;display:inline-block;font-size:clamp(4.8rem,20vw,6.8rem);line-height:1;
+  cursor:pointer;user-select:none;
+  animation:boxFloat 3.4s ease-in-out infinite;
+  filter:drop-shadow(0 18px 40px rgba(255,180,60,.75)) drop-shadow(0 0 60px rgba(255,215,120,.5));
+  transition:transform .35s cubic-bezier(.2,1.6,.4,1)}
+.gold-box:hover{transform:scale(1.08) rotate(-4deg)}
+.gold-box:active{transform:scale(.94)}
+.gold-box.open{animation:boxOpen 1s cubic-bezier(.2,1.6,.4,1) forwards}
+@keyframes boxFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(3deg)}}
+@keyframes boxOpen{0%{transform:scale(1)}30%{transform:scale(1.4) rotate(15deg);filter:brightness(1.8)}60%{transform:scale(1.15) rotate(-6deg)}100%{transform:scale(1.25);filter:brightness(1.4)}}
 
-.char{width:min(180px,44vw);height:auto;display:block;margin:0 auto;animation:bob 2.4s ease-in-out infinite;filter:drop-shadow(0 18px 34px rgba(255,90,160,.45))}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+.name-badge{display:inline-block;margin:14px 0 20px;padding:10px 38px;border-radius:99px;
+  font-size:clamp(1.2rem,5vw,1.6rem);font-weight:900;letter-spacing:1px;
+  background:linear-gradient(135deg,rgba(255,215,120,.32),rgba(200,50,60,.32));
+  border:1.5px solid rgba(255,215,120,.65);
+  color:#ffefb8;
+  box-shadow:0 0 40px rgba(255,200,80,.45),inset 0 0 26px rgba(255,215,120,.22);
+  animation:badgeGlow 2.8s ease-in-out infinite}
+@keyframes badgeGlow{0%,100%{box-shadow:0 0 30px rgba(255,200,80,.35)}50%{box-shadow:0 0 60px rgba(255,215,120,.75)}}
+
+/* ============ CHARACTER: شاهزاده ============ */
+.char{width:min(200px,48vw);height:auto;display:block;margin:0 auto;animation:bob 2.6s ease-in-out infinite;
+  filter:drop-shadow(0 20px 40px rgba(255,180,60,.4))}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
 .char.shake{animation:shakeX .5s ease}
 @keyframes shakeX{0%,100%{transform:translateX(0)}20%{transform:translateX(-11px) rotate(-3deg)}40%{transform:translateX(11px) rotate(3deg)}60%{transform:translateX(-7px)}80%{transform:translateX(7px)}}
 
-#heartTap{font-size:clamp(3.4rem,16vw,4.6rem);line-height:1;cursor:pointer;user-select:none;display:inline-block;transition:transform .16s cubic-bezier(.2,1.8,.4,1);filter:drop-shadow(0 0 22px rgba(255,80,150,.85))}
-#heartTap:active{transform:scale(.82)}
-#heartMeter{width:min(240px,68vw);height:14px;margin:20px auto 10px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;border:1px solid rgba(255,255,255,.14)}
-#heartMeterFill{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,#ff5fa2,#ffb3d5);box-shadow:0 0 18px rgba(255,95,162,.9);transition:width .4s cubic-bezier(.2,1.2,.3,1)}
-.pop-heart{position:fixed;z-index:95;pointer-events:none;font-size:1.6rem;animation:popUp 1.3s ease-out forwards}
-@keyframes popUp{0%{opacity:1;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-260%) scale(1.7)}}
+/* ============ GATE 4: شمعدون هفت‌شعله ============ */
+.candelabra{display:flex;justify-content:center;align-items:flex-end;gap:clamp(6px,2vw,14px);margin:24px 0 8px;flex-wrap:nowrap}
+.candle{position:relative;font-size:clamp(1.8rem,7vw,2.6rem);line-height:1;cursor:pointer;user-select:none;
+  transition:transform .3s cubic-bezier(.2,1.6,.4,1);
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+.candle:active{transform:scale(.9)}
+.candle .flame{position:absolute;left:50%;top:-6px;transform:translateX(-50%);font-size:clamp(.9rem,3.4vw,1.2rem);
+  opacity:0;transition:opacity .4s;filter:drop-shadow(0 0 14px rgba(255,180,60,1))}
+.candle.lit .flame{opacity:1;animation:flicker .4s ease-in-out infinite alternate}
+@keyframes flicker{0%{transform:translateX(-50%) scaleY(1) rotate(-3deg)}100%{transform:translateX(-50%) scaleY(1.2) rotate(3deg)}}
+.candle:nth-child(odd){padding-bottom:8px}
+.candle:nth-child(4){padding-bottom:16px}
 
+/* ============ GATE 6: گلاب‌پاش ============ */
+.rosewater-wrap{position:relative;display:inline-block;margin:14px 0 8px;cursor:pointer;user-select:none;
+  transition:transform .3s cubic-bezier(.2,1.6,.4,1);
+  filter:drop-shadow(0 16px 30px rgba(255,200,140,.6))}
+.rosewater-wrap:active{transform:scale(.94)}
+.rosewater{font-size:clamp(4rem,18vw,5.6rem);line-height:1;display:block;
+  animation:floaty 3.2s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
+.drop-pop{position:fixed;z-index:96;pointer-events:none;font-size:1.5rem;
+  animation:dropFly 1.5s ease-out forwards;
+  filter:drop-shadow(0 0 10px rgba(255,180,200,.9))}
+@keyframes dropFly{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(.4)}
+  100%{opacity:0;transform:translate(-50%,-50%) translate(var(--dx,30px),var(--dy,-100px)) scale(1.3) rotate(180deg)}
+}
+#rwMeter{width:min(260px,72vw);height:14px;margin:18px auto 10px;border-radius:99px;
+  background:rgba(255,215,120,.1);overflow:hidden;border:1px solid rgba(255,215,120,.2)}
+#rwMeterFill{height:100%;width:0%;border-radius:99px;
+  background:linear-gradient(90deg,#ffd970,#ff6f9c);
+  box-shadow:0 0 20px rgba(255,215,120,.9);
+  transition:width .4s cubic-bezier(.2,1.2,.3,1)}
+
+/* ============ OPTIONS ============ */
 .options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
-.opt{font-family:inherit;font-size:clamp(.8rem,3.2vw,.95rem);font-weight:700;padding:14px 8px;border-radius:18px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:#fff;transition:.25s}
-.opt:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
-.opt.wrong{animation:shakeX .45s;border-color:#ff6b8a;background:rgba(255,80,120,.18)}
-.opt.right{background:linear-gradient(135deg,rgba(120,255,190,.28),rgba(255,215,106,.28));border-color:#8ef0c0;box-shadow:0 0 28px rgba(140,240,190,.4)}
+.opt{font-family:inherit;font-size:clamp(.8rem,3.2vw,.95rem);font-weight:700;padding:14px 8px;border-radius:18px;cursor:pointer;
+  background:rgba(255,215,120,.07);border:1px solid rgba(255,215,120,.25);color:#ffe9c0;transition:.25s}
+.opt:hover{background:rgba(255,215,120,.18);transform:translateY(-2px)}
+.opt.wrong{animation:shakeX .45s;border-color:#ff6f8a;background:rgba(255,80,120,.2)}
+.opt.right{background:linear-gradient(135deg,rgba(255,215,120,.35),rgba(255,180,80,.35));border-color:#ffd970;box-shadow:0 0 28px rgba(255,215,120,.5)}
 
-#g8input{font-family:inherit;font-size:1.05rem;text-align:center;width:min(280px,85%);padding:14px 18px;margin:6px auto 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);color:#fff;outline:none;display:block;transition:.3s}
-#g8input:focus{border-color:#ff8fc0;box-shadow:0 0 26px rgba(255,143,192,.45);background:rgba(255,255,255,.12)}
-#g8input::placeholder{color:rgba(255,255,255,.35)}
+/* ============ GATE 5: دیوان حافظ ============ */
+.hafez-book{font-size:clamp(4rem,18vw,5.6rem);line-height:1;cursor:pointer;user-select:none;display:inline-block;
+  transition:transform .35s cubic-bezier(.2,1.6,.4,1);
+  animation:bookFloat 3.2s ease-in-out infinite;
+  filter:drop-shadow(0 14px 30px rgba(255,200,100,.65))}
+@keyframes bookFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+.hafez-book:hover{transform:scale(1.08) rotate(-5deg)}
+.hafez-book.open{animation:bookOpen .8s ease}
+@keyframes bookOpen{0%{transform:scale(1)}35%{transform:scale(1.3) rotate(-12deg);filter:brightness(1.7)}70%{transform:scale(1.15) rotate(8deg)}100%{transform:scale(1.05)}}
+.verse{font-size:clamp(.9rem,3.6vw,1.05rem);line-height:2.1;color:#ffe9c0;margin:14px 0 4px;font-weight:500;
+  opacity:0;transition:opacity 1.2s ease;text-shadow:0 0 20px rgba(255,200,80,.5)}
+.verse.on{opacity:1}
+.verse .vline{display:block}
+.verse .vline + .vline{margin-top:4px}
 
-.flower-pick{display:flex;justify-content:center;gap:14px;margin:22px 0 6px;flex-wrap:wrap}
-.flower-pick button{font-size:clamp(2.6rem,12vw,3.4rem);background:none;border:none;cursor:pointer;transition:transform .3s cubic-bezier(.2,1.6,.4,1);animation:floaty 3.2s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(255,150,200,.7))}
-.flower-pick button:nth-child(2){animation-delay:.5s}
-.flower-pick button:nth-child(3){animation-delay:1s}
-.flower-pick button:hover{transform:scale(1.3) rotate(15deg)}
-.flower-pick button.picked{animation:flyUp 1.2s cubic-bezier(.3,.9,.3,1) forwards}
-@keyframes flyUp{0%{transform:scale(1)}100%{transform:translateY(-75vh) scale(.2);opacity:0}}
+/* ============ GATE 9: الماس‌ها ============ */
+.gems{display:flex;justify-content:center;gap:14px;margin:22px 0 6px;flex-wrap:wrap}
+.gem{width:clamp(72px,20vw,100px);height:clamp(72px,20vw,100px);
+  border-radius:50%;cursor:pointer;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(2rem,9vw,2.6rem);
+  transition:transform .35s cubic-bezier(.2,1.6,.4,1),box-shadow .35s;
+  animation:gemFloat 3.6s ease-in-out infinite;
+  border:2px solid rgba(255,215,120,.4)}
+.gem:nth-child(2){animation-delay:.5s}
+.gem:nth-child(3){animation-delay:1s}
+.gem[data-gem="ruby"]{background:radial-gradient(circle at 35% 30%,#ff8f8f,#c02030 55%,#6a0810);box-shadow:0 0 40px rgba(255,80,100,.6),inset 0 0 22px rgba(255,180,180,.6)}
+.gem[data-gem="emerald"]{background:radial-gradient(circle at 35% 30%,#90ffb0,#20a060 55%,#064020);box-shadow:0 0 40px rgba(100,255,150,.5),inset 0 0 22px rgba(200,255,220,.6)}
+.gem[data-gem="sapphire"]{background:radial-gradient(circle at 35% 30%,#90c8ff,#2050b0 55%,#081040);box-shadow:0 0 40px rgba(100,150,255,.6),inset 0 0 22px rgba(200,220,255,.6)}
+.gem:hover{transform:translateY(-8px) scale(1.12)}
+.gem.picked{animation:gemPick 1s ease forwards}
+@keyframes gemFloat{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(6deg)}}
+@keyframes gemPick{0%{transform:scale(1)}30%{transform:scale(1.4);filter:brightness(1.8)}100%{transform:scale(1.15)}}
+.gem-name{position:absolute;bottom:-24px;left:0;right:0;font-size:.72rem;color:rgba(255,230,180,.85);text-align:center;font-weight:700;text-shadow:0 0 10px rgba(0,0,0,.9)}
 
-.candle-wrap{position:relative;display:inline-block;margin:14px 0 10px;cursor:pointer;user-select:none;transition:transform .3s}
-.candle-wrap:active{transform:scale(.94)}
-.candle-body{font-size:clamp(3.8rem,17vw,5.2rem);line-height:1;display:block;filter:drop-shadow(0 0 30px rgba(255,180,90,.55))}
-.flame{position:absolute;left:50%;top:-14px;transform:translateX(-50%);font-size:clamp(1.6rem,7vw,2rem);animation:flicker .35s ease-in-out infinite alternate;filter:drop-shadow(0 0 22px rgba(255,180,60,.95));transition:opacity .6s,transform .6s}
-@keyframes flicker{0%{transform:translateX(-50%) scaleY(1) rotate(-2deg)}100%{transform:translateX(-50%) scaleY(1.15) rotate(2deg)}}
-.flame.out{opacity:0;transform:translateX(-50%) translateY(-40px) scale(.2)}
+/* ============ GATE 10: آیینه جادویی ============ */
+.mirror-wrap{position:relative;display:inline-block;margin:14px 0 8px;cursor:pointer;user-select:none;
+  transition:transform .35s cubic-bezier(.2,1.6,.4,1);
+  filter:drop-shadow(0 16px 40px rgba(255,215,120,.55))}
+.mirror-wrap:active{transform:scale(.94)}
+.mirror{font-size:clamp(4.4rem,20vw,6rem);line-height:1;display:block;
+  animation:mirrorGlow 3sease-in-out infinite}
+@keyframes mirrorGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35) drop-shadow(0 0 30px rgba(255,215,120,.9))}}
+.mirror.revealed{animation:mirrorReveal 1s ease forwards}
+@keyframes mirrorReveal{0%{transform:scale(1)}40%{transform:scale(1.2) rotate(-5deg);filter:brightness(2)}100%{transform:scale(1.08)}}
 
-.envelope{font-size:clamp(3.6rem,16vw,5rem);line-height:1;cursor:pointer;user-select:none;display:inline-block;transition:transform .3s cubic-bezier(.2,1.6,.4,1);filter:drop-shadow(0 12px 30px rgba(255,150,200,.65));animation:floaty 3s ease-in-out infinite}
-.envelope:hover{transform:scale(1.06) rotate(-3deg)}
-.envelope.open{animation:openBounce .8s ease}
-@keyframes openBounce{0%{transform:scale(1)}30%{transform:scale(1.25) rotate(8deg)}60%{transform:scale(1.1) rotate(-4deg)}100%{transform:scale(1)}}
+/* ============ GATE 11: پر پرنیان ============ */
+.feather-wrap{position:relative;display:inline-block;margin:14px 0 8px;cursor:pointer;user-select:none;
+  transition:transform .3s cubic-bezier(.2,1.6,.4,1);
+  filter:drop-shadow(0 12px 26px rgba(255,200,140,.7))}
+.feather-wrap:active{transform:scale(.94)}
+.feather{font-size:clamp(4.2rem,20vw,5.8rem);line-height:1;display:block;
+  animation:featherWave 3.4s ease-in-out infinite}
+@keyframes featherWave{0%,100%{transform:rotate(-8deg) translateY(0)}50%{transform:rotate(8deg) translateY(-10px)}}
+.feather.blown{animation:featherBlow 1.4s cubic-bezier(.2,1.2,.4,1) forwards}
+@keyframes featherBlow{0%{transform:rotate(0) translateY(0);opacity:1}50%{transform:rotate(30deg) translateY(-30px);opacity:.9}100%{transform:rotate(60deg) translateY(-120vh);opacity:0}}
 
-.pick-stars{display:flex;justify-content:center;gap:14px;margin:18px 0 4px}
-.pick-star{font-size:clamp(2rem,9vw,2.6rem);background:none;border:none;cursor:pointer;filter:drop-shadow(0 0 14px rgba(255,220,120,.8));transition:transform .25s cubic-bezier(.2,1.6,.4,1);animation:floaty 3.2s ease-in-out infinite}
-.pick-star:nth-child(2){animation-delay:.4s}
-.pick-star:nth-child(3){animation-delay:.8s}
-.pick-star:hover{transform:scale(1.28) rotate(12deg)}
-.pick-star.chosen{animation:flyUp 1.2s cubic-bezier(.3,.9,.3,1) forwards}
+/* ============ INPUT ============ */
+#g8input{font-family:inherit;font-size:1.1rem;text-align:center;width:min(280px,85%);padding:14px 18px;margin:6px auto 14px;
+  border-radius:16px;border:1.5px solid rgba(255,215,120,.4);
+  background:rgba(60,10,10,.6);color:#ffefb8;outline:none;display:block;transition:.3s}
+#g8input:focus{border-color:#ffd970;box-shadow:0 0 30px rgba(255,215,120,.5);background:rgba(80,20,20,.7)}
+#g8input::placeholder{color:rgba(255,215,120,.4)}
 
-.breath-circle{width:clamp(90px,24vw,120px);height:clamp(90px,24vw,120px);border-radius:50%;margin:6px auto 22px;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.9),rgba(255,140,200,.45) 45%,rgba(140,80,255,.25) 75%);box-shadow:0 0 60px rgba(255,140,200,.6),inset 0 0 40px rgba(255,255,255,.35);animation:breathe 8s ease-in-out infinite}
-@keyframes breathe{0%,100%{transform:scale(.72);opacity:.72}50%{transform:scale(1.22);opacity:1}}
-.big-emoji{font-size:clamp(3.2rem,14vw,4.4rem);line-height:1;animation:floaty 3s ease-in-out infinite;filter:drop-shadow(0 0 26px rgba(255,215,106,.8))}
+/* ============ GATE 12: آرزو ستاره ============ */
+.wish-stars{display:flex;justify-content:center;gap:16px;margin:18px 0 4px;flex-wrap:wrap}
+.wstar{font-size:clamp(2.6rem,11vw,3.4rem);background:none;border:none;cursor:pointer;
+  filter:drop-shadow(0 0 16px rgba(255,215,120,.9));transition:transform .25s cubic-bezier(.2,1.6,.4,1);
+  animation:floaty 3.2s ease-in-out infinite}
+.wstar:nth-child(2){animation-delay:.4s}
+.wstar:nth-child(3){animation-delay:.8s}
+.wstar:hover{transform:scale(1.3) rotate(12deg)}
+.wstar.picked{animation:starFly 1.2s cubic-bezier(.3,.9,.3,1) forwards}
+@keyframes starFly{0%{transform:scale(1)}100%{transform:translateY(-75vh) scale(.2);opacity:0}}
 
-#countdown{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;font-size:32vmin;font-weight:900;color:#ffe9a8;text-shadow:0 0 60px rgba(255,200,110,.95),0 0 140px rgba(255,140,200,.7);opacity:0;pointer-events:none;transition:opacity .3s}
+/* ============ GATE 13: پازل ============ */
+.puzzle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px auto 4px;max-width:280px}
+.puzzle-cell{aspect-ratio:1;border-radius:14px;
+  background:linear-gradient(160deg,rgba(255,215,120,.15),rgba(200,60,40,.18));
+  border:1px solid rgba(255,215,120,.35);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;color:rgba(255,215,120,.35);transition:.35s cubic-bezier(.2,1.4,.4,1)}
+.puzzle-cell:hover{transform:scale(1.06);border-color:rgba(255,215,120,.75)}
+.puzzle-cell.done{background:linear-gradient(160deg,rgba(255,215,120,.5),rgba(255,150,80,.4));
+  color:#2a0a00;border-color:#ffd970;box-shadow:0 0 24px rgba(255,215,120,.5);cursor:default}
+.puzzle-cell.done:hover{transform:none}
+
+/* ============ GATE 14: تنفس ============ */
+.breath-circle{width:clamp(90px,24vw,120px);height:clamp(90px,24vw,120px);border-radius:50%;margin:6px auto 22px;
+  background:radial-gradient(circle at 35% 30%,rgba(255,240,200,.95),rgba(255,200,120,.6) 45%,rgba(200,80,40,.25) 75%);
+  box-shadow:0 0 60px rgba(255,200,100,.6),inset 0 0 40px rgba(255,255,255,.4);
+  animation:breathe 8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.72);opacity:.7}50%{transform:scale(1.22);opacity:1}}
+.big-emoji{font-size:clamp(3.4rem,15vw,4.6rem);line-height:1;animation:floaty 3s ease-in-out infinite;filter:drop-shadow(0 12px 30px rgba(255,180,60,.6))}
+
+/* ============ COUNTDOWN ============ */
+#countdown{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;
+  font-size:32vmin;font-weight:900;color:#ffe9a8;
+  text-shadow:0 0 60px rgba(255,200,110,.95),0 0 140px rgba(255,140,80,.7);
+  opacity:0;pointer-events:none;transition:opacity .3s}
 #countdown.show{opacity:1}
 @keyframes pop{0%{transform:scale(.3);opacity:0}30%{transform:scale(1.15);opacity:1}100%{transform:scale(1.9);opacity:0}}
 
-#gift{position:fixed;inset:0;z-index:20;display:none;overflow:hidden}
+/* ============ GIFT ============ */
+#gift{position:fixed;inset:0;z-index:20;display:none;overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(180,40,50,.55) 0%, transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(140,70,20,.6) 0%, transparent 55%),
+    linear-gradient(160deg,#1a0505,#3a0d0d 40%,#2a0808 70%,#0f0303)}
 #gift.show{display:block}
-#stage{position:absolute;left:50%;top:50%;width:1000px;height:1000px;transform-origin:50% 50%;transform:translate(-50%,-50%) scale(var(--stage-scale,1))}
-#glowHeart{position:absolute;left:0;top:0;width:1000px;height:1000px;z-index:1;opacity:0;transform:scale(.86);transition:opacity 2s ease,transform 2s cubic-bezier(.2,1.1,.3,1)}
-#glowHeart.on{opacity:1;transform:scale(1);animation:heartBeat 1.5s ease-in-out infinite 1.8s}
-@keyframes heartBeat{
-  0%,100%{transform:scale(1);filter:blur(2px) drop-shadow(0 0 34px rgba(255,90,160,.5))}
-  14%{transform:scale(1.05);filter:blur(2px) drop-shadow(0 0 66px rgba(255,90,160,.9))}
-  28%{transform:scale(1)}
-  42%{transform:scale(1.035);filter:blur(2px) drop-shadow(0 0 54px rgba(255,90,160,.75))}
-  60%{transform:scale(1)}
+#stage{position:absolute;left:50%;top:50%;width:1000px;height:1000px;
+  transform-origin:50% 50%;transform:translate(-50%,-50%) scale(var(--stage-scale,1))}
+
+/* قلب طلایی پس‌زمینه */
+#goldHeart{
+  position:absolute;left:50%;top:50%;width:900px;height:900px;
+  transform:translate(-50%,-50%);
+  opacity:0;transition:opacity 2.2s ease;z-index:0;
+  filter:blur(2px) drop-shadow(0 0 60px rgba(255,200,80,.7))
+}
+#goldHeart.on{opacity:1;animation:goldBeat 1.6s ease-in-out infinite 2s}
+@keyframes goldBeat{
+  0%,100%{transform:translate(-50%,-50%) scale(1);filter:blur(2px) drop-shadow(0 0 50px rgba(255,200,80,.6))}
+  14%{transform:translate(-50%,-50%) scale(1.05);filter:blur(2px) drop-shadow(0 0 100px rgba(255,220,120,1))}
+  28%{transform:translate(-50%,-50%) scale(1)}
+  42%{transform:translate(-50%,-50%) scale(1.03);filter:blur(2px) drop-shadow(0 0 80px rgba(255,220,120,.85))}
+  60%{transform:translate(-50%,-50%) scale(1)}
 }
 
 #heartWords{position:absolute;inset:0;z-index:2}
-.hw{position:absolute;opacity:0;white-space:nowrap;text-align:center;color:#ffeaf4;font-weight:500;
-  text-shadow:0 0 10px rgba(255,120,180,.95),0 0 24px rgba(255,70,150,.65),0 0 46px rgba(255,40,120,.35);
-  transition:opacity .9s ease,transform 1s cubic-bezier(.18,1.3,.35,1);line-height:1}
-.hw.on{opacity:.95}
+.hw{
+  position:absolute;opacity:0;white-space:nowrap;text-align:center;
+  color:#fff3d0;font-weight:500;
+  text-shadow:
+    0 0 10px rgba(255,215,120,.95),
+    0 0 24px rgba(255,180,60,.75),
+    0 0 46px rgba(200,80,40,.55);
+  transition:opacity .9s ease,transform 1s cubic-bezier(.18,1.3,.35,1);
+  line-height:1}
+.hw.on{opacity:.96}
 
-#mainText{position:absolute;left:50%;top:46%;z-index:3;transform:translate(-50%,-50%) scale(.5);opacity:0;text-align:center;white-space:nowrap;transition:opacity 1.4s ease,transform 1.4s cubic-bezier(.16,1.4,.35,1);pointer-events:none}
+#mainText{position:absolute;left:50%;top:46%;z-index:3;
+  transform:translate(-50%,-50%) scale(.5);opacity:0;text-align:center;white-space:nowrap;
+  transition:opacity 1.4s ease,transform 1.4s cubic-bezier(.16,1.4,.35,1);pointer-events:none}
 #mainText.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
-#mainText .l1{font-weight:900;line-height:1.2;background:linear-gradient(180deg,#fff 0%,#ffe9b0 45%,#ffb0d8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(255,190,120,.95)) drop-shadow(0 0 60px rgba(255,90,170,.75));animation:titleGlow 2.6s ease-in-out infinite}
-#mainText .l2{font-weight:900;line-height:1.4;background:linear-gradient(180deg,#fff 0%,#ffd0e8 50%,#ff8fc0 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 20px rgba(255,140,200,.95)) drop-shadow(0 0 55px rgba(255,60,140,.75));animation:titleGlow 2.6s ease-in-out infinite .5s}
-@keyframes titleGlow{0%,100%{filter:drop-shadow(0 0 18px rgba(255,190,120,.75)) drop-shadow(0 0 46px rgba(255,90,170,.55))}50%{filter:drop-shadow(0 0 34px rgba(255,220,150,1)) drop-shadow(0 0 90px rgba(255,90,170,.95))}}
+#mainText .l1{
+  font-weight:900;line-height:1.2;
+  background:linear-gradient(180deg,#fff8d8 0%,#ffe9a8 30%,#ffd970 55%,#e0a030 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 26px rgba(255,220,120,.95)) drop-shadow(0 0 70px rgba(255,140,60,.8));
+  animation:titleGlow 2.6s ease-in-out infinite}
+#mainText .l2{
+  font-weight:900;line-height:1.4;
+  background:linear-gradient(180deg,#fff8d8 0%,#ffd0a8 50%,#e88a30 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 24px rgba(255,220,120,.95)) drop-shadow(0 0 65px rgba(255,140,60,.85));
+  animation:titleGlow 2.6s ease-in-out infinite .5s}
+@keyframes titleGlow{
+  0%,100%{filter:drop-shadow(0 0 20px rgba(255,220,120,.8)) drop-shadow(0 0 50px rgba(255,140,60,.55))}
+  50%{filter:drop-shadow(0 0 38px rgba(255,235,160,1)) drop-shadow(0 0 100px rgba(255,140,60,1))}
+}
 
+/* ============ GARDEN: گل رز + جرقه طلایی + اسلیمی ============ */
 #garden{position:fixed;inset:0;z-index:30;pointer-events:none;overflow:hidden}
-.flower{position:absolute;top:-12vh;will-change:transform;animation-name:fall;animation-timing-function:linear;animation-iteration-count:infinite}
-.flower-inner{display:block;animation-name:sway;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;filter:drop-shadow(0 0 10px rgba(255,150,200,.6))}
-@keyframes fall{0%{transform:translateY(-14vh) translateX(0)}100%{transform:translateY(118vh) translateX(7vw)}}
-@keyframes sway{0%{transform:rotate(-28deg) translateX(-18px) scale(.92)}100%{transform:rotate(28deg) translateX(18px) scale(1.06)}}
+.float-el{position:absolute;top:-12vh;will-change:transform;
+  animation-name:fall;animation-timing-function:linear;animation-iteration-count:infinite}
+.float-el-inner{display:block;animation-name:sway;animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;animation-direction:alternate;
+  filter:drop-shadow(0 0 12px rgba(255,200,80,.7))}
+@keyframes fall{0%{transform:translateY(-14vh) translateX(0)}100%{transform:translateY(118vh) translateX(8vw)}}
+@keyframes sway{0%{transform:rotate(-30deg) translateX(-22px) scale(.9)}100%{transform:rotate(30deg) translateX(22px) scale(1.08)}}
 
+.spark{position:fixed;z-index:31;pointer-events:none;
+  font-size:14px;
+  animation:sparkleFloat linear infinite;
+  filter:drop-shadow(0 0 8px rgba(255,240,180,.95))}
+@keyframes sparkleFloat{
+  0%{opacity:0;transform:translate(0,0) scale(.4) rotate(0)}
+  15%{opacity:1}
+  85%{opacity:1}100%{opacity:0;transform:translate(var(--dx,40px),-100vh) scale(1.2) rotate(720deg)}
+}
+
+/* ============ FLASH & SWEEP ============ */
 #flash{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:0;
-  background:radial-gradient(circle at 50% 45%,rgba(255,255,255,1) 0%,rgba(255,236,170,.95) 16%,rgba(255,200,90,.6) 34%,rgba(255,140,200,.28) 55%,transparent 74%);
+  background:radial-gradient(circle at 50% 46%,
+    rgba(255,255,255,1) 0%,
+    rgba(255,236,170,.95) 16%,
+    rgba(255,190,90,.65) 34%,
+    rgba(255,120,60,.35) 55%,
+    transparent 74%);
   mix-blend-mode:screen}
-#flash.go{animation:flashAnim 1.6s ease-out forwards}
+#flash.go{animation:flashAnim 1.7s ease-out forwards}
 @keyframes flashAnim{0%{opacity:0;transform:scale(.25)}14%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.75)}}
 #sweep{position:fixed;inset:0;z-index:91;pointer-events:none;
-  background:linear-gradient(105deg,transparent 34%,rgba(255,245,200,.95) 50%,transparent 66%);
+  background:linear-gradient(105deg,transparent 34%,rgba(255,245,210,.95) 50%,transparent 66%);
   transform:translateX(-130%);mix-blend-mode:screen}
-#sweep.go{animation:sweepAnim 1.5s cubic-bezier(.4,0,.3,1) forwards}
+#sweep.go{animation:sweepAnim 1.6s cubic-bezier(.4,0,.3,1) forwards}
 @keyframes sweepAnim{0%{transform:translateX(-130%);opacity:0}10%{opacity:1}100%{transform:translateX(130%);opacity:0}}
 
-#finalNote{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:14px 16px 20px;text-align:center;opacity:0;transform:translateY(24px);transition:opacity 1.4s ease,transform 1.4s cubic-bezier(.2,1.2,.3,1);pointer-events:none}
+/* ============ FINAL NOTE ============ */
+#finalNote{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:14px 16px 20px;text-align:center;
+  opacity:0;transform:translateY(24px);transition:opacity 1.4s ease,transform 1.4s cubic-bezier(.2,1.2,.3,1);pointer-events:none}
 #finalNote.on{opacity:1;transform:none;pointer-events:auto}
-#finalNote .note1{font-size:clamp(.95rem,3.6vw,1.05rem);font-weight:700;margin-bottom:4px;color:#ffe9f4;text-shadow:0 0 18px rgba(255,120,180,.8)}
-#finalNote .note2{font-size:clamp(.72rem,3vw,.8rem);margin-bottom:10px;color:rgba(255,255,255,.55)}
+#finalNote .note1{font-size:clamp(.95rem,3.6vw,1.05rem);font-weight:700;margin-bottom:4px;color:#fff3d0;
+  text-shadow:0 0 18px rgba(255,200,80,.9)}
+#finalNote .note2{font-size:clamp(.72rem,3vw,.82rem);margin-bottom:10px;color:rgba(255,215,140,.65)}
 
 @media (max-width:600px){
   .gate{padding:18px 12px}
   .gate-inner{padding:26px 16px 22px;border-radius:24px}
   .options{gap:8px}
+  .puzzle-grid{max-width:240px}
 }
 </style>
 </head>
 <body>
 
 <div id="bg"></div>
+<div id="patterns">
+  <div class="pat" style="left:-5%;top:-5%">❁</div>
+  <div class="pat" style="right:-5%;bottom:-5%;animation-direction:reverse">❀</div>
+</div>
 <div id="stars"></div>
 
-<!-- ۱ -->
+<!-- ========== ۱: جعبه طلایی ========== -->
 <section class="gate active" id="gate1">
   <div class="gate-inner">
-    <div class="gift-emoji">🎁</div>
-    <h1 class="g-title">یه هدیه رسیده...</h1>
-    <p class="g-sub">برای کسی که دنیا رو قشنگ‌تر می‌کنه 🌸</p>
+    <div class="gold-box" id="goldBox">🎁</div>
+    <h1 class="g-title">یه هدیه‌ی سلطنتی رسیده...</h1>
+    <p class="g-sub">از طرف کسی که قلبت رو می‌شناسه 👑</p>
     <div class="name-badge">نغمه</div>
     <div class="btn-row"><button class="btn" data-goto="1">بازش کن ✨</button></div>
   </div>
 </section>
 
-<!-- ۲ -->
+<!-- ========== ۲: شاهزاده می‌پرسه ========== -->
 <section class="gate" id="gate2">
   <div class="gate-inner">
-    <svg class="char" id="char2" viewBox="0 0 220 240">
+    <svg class="char" id="char2" viewBox="0 0 220 260">
       <defs>
-        <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffe3cf"/><stop offset="100%" stop-color="#f7c3a5"/></linearGradient>
-        <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff8fc0"/><stop offset="100%" stop-color="#c94b8f"/></linearGradient>
+        <linearGradient id="skin1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffe3cf"/><stop offset="100%" stop-color="#f7c3a5"/></linearGradient>
+        <linearGradient id="dress1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8a530"/><stop offset="100%" stop-color="#8a4a08"/></linearGradient>
+        <linearGradient id="hair1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a1a10"/><stop offset="100%" stop-color="#1a0805"/></linearGradient>
       </defs>
-      <path d="M110 150 c40 0 62 22 66 58 l6 30 h-144 l6-30 c4-36 26-58 66-58z" fill="url(#shirt)"/>
-      <rect x="98" y="126" width="24" height="32" rx="12" fill="#f0b99b"/>
-      <ellipse cx="110" cy="92" rx="58" ry="60" fill="url(#skin)"/>
-      <path d="M52 92 c0-42 26-64 58-64 s58 22 58 64 c0-20-12-32-26-32 c-8 0-14 4-20 10 c-10 10-24 14-40 10 c-14-4-30 0-30 12z" fill="#4a2b3d"/>
-      <ellipse cx="88" cy="88" rx="13.5" ry="15.5" fill="#fff"/>
-      <ellipse cx="132" cy="88" rx="13.5" ry="15.5" fill="#fff"/>
-      <circle cx="88" cy="90" r="6.8" fill="#2a1a24"/>
-      <circle cx="132" cy="90" r="6.8" fill="#2a1a24"/>
-      <circle cx="90.5" cy="86.5" r="2.3" fill="#fff"/>
-      <circle cx="134.5" cy="86.5" r="2.3" fill="#fff"/>
-      <path d="M74 64 q14 -9 26 -3" stroke="#3a2030" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-      <path d="M146 64 q-14 -9 -26 -3" stroke="#3a2030" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-      <ellipse cx="110" cy="118" rx="9.5" ry="11.5" fill="#7a2b3d"/>
-      <ellipse cx="72" cy="108" rx="11" ry="6" fill="#ff9ec2" opacity=".55"/>
-      <ellipse cx="148" cy="108" rx="11" ry="6" fill="#ff9ec2" opacity=".55"/>
+      <!-- شنل -->
+      <path d="M60 160 q-10 60 5 95 l90 0 q15-35 5-95z" fill="rgba(200,50,60,.55)"/>
+      <!-- بدن -->
+      <path d="M110 158 c42 0 64 22 68 58 l6 30 h-148 l6-30 c4-36 26-58 68-58z" fill="url(#dress1)"/>
+      <rect x="98" y="132" width="24" height="34" rx="12" fill="#f0b99b"/>
+      <ellipse cx="110" cy="95" rx="56" ry="60" fill="url(#skin1)"/>
+      <!-- موها -->
+      <path d="M54 92 c0-46 26-70 56-70 s56 24 56 70 c0-16-8-30-18-36 c-8-2-14 4-20 10 c-10 10-24 14-38 12 c-14-2-24 0-30 8 c-6 6-8 8-6 6z" fill="url(#hair1)"/>
+      <!-- تاج -->
+      <path d="M70 42 l15 -22 l15 18 l10 -22 l10 22 l15 -18 l15 22 z" fill="#ffd970" stroke="#a06008" stroke-width="1.5" stroke-linejoin="round"/>
+      <circle cx="70" cy="42" r="3" fill="#c04030"/>
+      <circle cx="100" cy="38" r="3" fill="#c04030"/>
+      <circle cx="110" cy="30" r="3" fill="#c04030"/>
+      <circle cx="120" cy="38" r="3" fill="#c04030"/>
+      <circle cx="150" cy="42" r="3" fill="#c04030"/>
+      <!-- چشم‌ها -->
+      <ellipse cx="88" cy="96" rx="13.5" ry="15.5" fill="#fff"/>
+      <ellipse cx="132" cy="96" rx="13.5" ry="15.5" fill="#fff"/>
+      <circle cx="88" cy="98" r="7" fill="#2a1a10"/>
+      <circle cx="132" cy="98" r="7" fill="#2a1a10"/>
+      <circle cx="90.5" cy="94.5" r="2.4" fill="#fff"/>
+      <circle cx="134.5" cy="94.5" r="2.4" fill="#fff"/>
+      <path d="M74 70 q14 -10 26 -3" stroke="#1a0805" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M146 70 q-14 -10 -26 -3" stroke="#1a0805" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="110" cy="124" rx="9.5" ry="11.5" fill="#7a2b3d"/>
+      <ellipse cx="72" cy="116" rx="11" ry="6" fill="#ff9ec2" opacity=".55"/>
+      <ellipse cx="148" cy="116" rx="11" ry="6" fill="#ff9ec2" opacity=".55"/>
     </svg>
-    <h1 class="g-title">مطمئنی می‌خوای ادامه بدی؟</h1>
-    <p class="g-sub" id="g2msg">آخه این هدیه یه‌کم... خاصه 😅</p>
+    <h1 class="g-title">مطمئنی می‌خوای وارد قصر بشی؟</h1>
+    <p class="g-sub" id="g2msg">آخه این قصر... پر از رازه 🏰</p>
     <div class="btn-row">
-      <button class="btn" id="g2yes">آره، ادامه بده</button>
-      <button class="btn ghost" id="g2no">نه، نمی‌خوام</button>
+      <button class="btn" id="g2yes">آره، ببرم به قصر</button>
+      <button class="btn ghost" id="g2no">نه، می‌ترسم</button>
     </div>
     <p class="g-hint" id="g2hint"></p>
   </div>
 </section>
 
-<!-- ۳ -->
+<!-- ========== ۳: قول ========== -->
 <section class="gate" id="gate3">
   <div class="gate-inner">
-    <div class="big-emoji">🤞</div>
-    <h1 class="g-title">قبلش یه قول بده</h1>
-    <p class="g-sub">قول بده امروز حداقل ۱۰ بار از ته دل لبخند بزنی</p>
+    <div class="big-emoji">👑</div>
+    <h1 class="g-title">قبلش یه قول سلطنتی بده</h1>
+    <p class="g-sub">قول بده هیچ‌وقت خودت رو کمتر از یه ملکه نبینی</p>
     <div class="btn-row">
       <button class="btn" id="g3yes">قول می‌دم</button>
       <button class="btn ghost" id="g3no">قول نمی‌دم</button>
@@ -218,119 +432,161 @@ body{font-family:'Vazirmatn',system-ui,sans-serif;background:#07030f;color:#fff;
   </div>
 </section>
 
-<!-- ۴ -->
+<!-- ========== ۴: شمعدون هفت‌شعله ========== -->
 <section class="gate" id="gate4">
   <div class="gate-inner">
-    <h1 class="g-title">یه قلب برام بفرست 💗</h1>
-    <p class="g-sub">روی قلب بزن تا پُر شه</p>
-    <div id="heartTap">💗</div>
-    <div id="heartMeter"><div id="heartMeterFill"></div></div>
-    <p class="g-hint" id="g4hint">۰ از ۵</p>
+    <h1 class="g-title">شمعدون هفت‌شعله 🕯️</h1>
+    <p class="g-sub">هر شمع رو روشن کن تا قصر نورانی شه</p>
+    <div class="candelabra" id="candelabra">
+      <div class="candle" data-i="0"><span class="flame">🔥</span>🕯️</div>
+      <div class="candle" data-i="1"><span class="flame">🔥</span>🕯️</div>
+      <div class="candle" data-i="2"><span class="flame">🔥</span>🕯️</div>
+      <div class="candle" data-i="3"><span class="flame">🔥</span>🕯️</div>
+      <div class="candle" data-i="4"><span class="flame">🔥</span>🕯️</div>
+      <div class="candle" data-i="5"><span class="flame">🔥</span>🕯️</div>
+      <div class="candle" data-i="6"><span class="flame">🔥</span>🕯️</div>
+    </div>
+    <p class="g-hint" id="g4hint">۰ از ۷ روشن شده</p>
   </div>
 </section>
 
-<!-- ۵ -->
+<!-- ========== ۵: دیوان حافظ ========== -->
 <section class="gate" id="gate5">
   <div class="gate-inner">
-    <h1 class="g-title">یه گل برام بچین 🌸</h1>
-    <p class="g-sub">هر گلی یه پیام برات داره...</p>
-    <div class="flower-pick">
-      <button data-flower="rose">🌹</button>
-      <button data-flower="tulip">🌷</button>
-      <button data-flower="blossom">🌸</button>
-    </div>
+    <h1 class="g-title">تفأل به حافظ 📖</h1>
+    <p class="g-sub">دیوان رو باز کن و یه شعر برات بخونم</p>
+    <div class="hafez-book" id="hafezBook">📖</div>
+    <div class="verse" id="verse"></div>
     <p class="g-hint" id="g5hint"></p>
   </div>
 </section>
 
-<!-- ۶ -->
+<!-- ========== ۶: گلاب‌پاش ========== -->
 <section class="gate" id="gate6">
   <div class="gate-inner">
-    <h1 class="g-title">یه شمع روشنه 🕯️</h1>
-    <p class="g-sub">فوتش کن و یه آرزو کن...</p>
-    <div class="candle-wrap" id="candle">
-      <span class="flame" id="flame">🔥</span>
-      <span class="candle-body">🕯️</span>
+    <h1 class="g-title">گلاب بپاش 🌹</h1>
+    <p class="g-sub">روی گلاب‌پاش بزن تا فضا عطرآگین شه</p>
+    <div class="rosewater-wrap" id="rosewaterWrap">
+      <span class="rosewater">💐</span>
     </div>
-    <p class="g-hint" id="g6hint">روی شمع بزن تا فوت شه</p>
+    <div id="rwMeter"><div id="rwMeterFill"></div></div>
+    <p class="g-hint" id="g6hint">۰ از ۵</p>
   </div>
 </section>
 
-<!-- ۷ -->
+<!-- ========== ۷: معما ========== -->
 <section class="gate" id="gate7">
   <div class="gate-inner">
     <h1 class="g-title">یه معما 🤔</h1>
-    <p class="g-sub">چیزی که هر روز از دیروز قشنگ‌تر می‌شه چیه؟</p>
+    <p class="g-sub">گرونبهاترین گنج قصر چیه؟</p>
     <div class="options">
-      <button class="opt" data-ok="0">خورشید ☀️</button>
-      <button class="opt" data-ok="0">گل‌های بهاری 🌷</button>
+      <button class="opt" data-ok="0">الماس 💎</button>
+      <button class="opt" data-ok="0">تاج طلا 👑</button>
       <button class="opt" data-ok="1">نغمه 🌸</button>
-      <button class="opt" data-ok="0">ماه 🌙</button>
+      <button class="opt" data-ok="0">جواهرات 🪙</button>
     </div>
     <p class="g-hint" id="g7hint">یکی رو انتخاب کن...</p>
   </div>
 </section>
 
-<!-- ۸ -->
+<!-- ========== ۸: قفل ========== -->
 <section class="gate" id="gate8">
   <div class="gate-inner">
-    <div class="big-emoji">🔒</div>
-    <h1 class="g-title">قفل جادویی</h1>
-    <p class="g-sub">برای باز شدن قفل، اسمت رو بنویس</p>
-    <input id="g8input" type="text" placeholder="اسمت رو بنویس..." autocomplete="off">
+    <div class="big-emoji">🔐</div>
+    <h1 class="g-title">قفل قصر</h1>
+    <p class="g-sub">برای باز شدن در، اسمت رو بنویس</p>
+    <input id="g8input"type="text" placeholder="اسمت رو بنویس..." autocomplete="off">
     <div class="btn-row"><button class="btn" id="g8btn">باز کن 🔓</button></div>
     <p class="g-hint" id="g8hint"></p>
   </div>
 </section>
 
-<!-- ۹ -->
+<!-- ========== ۹: انتخاب الماس ========== -->
 <section class="gate" id="gate9">
   <div class="gate-inner">
-    <h1 class="g-title">یه نامه برات اومده 💌</h1>
-    <p class="g-sub">بازش کن و بخونش...</p>
-    <div class="envelope" id="envelope">✉️</div>
+    <h1 class="g-title">یه جواهر انتخاب کن 💎</h1>
+    <p class="g-sub">هر جواهر یه راز از قصر داره</p>
+    <div class="gems">
+      <div class="gem" data-gem="ruby">🔴<span class="gem-name">یاقوت</span></div>
+      <div class="gem" data-gem="emerald">🟢<span class="gem-name">زمرد</span></div>
+      <div class="gem" data-gem="sapphire">🔵<span class="gem-name">فیروزه</span></div>
+    </div>
     <p class="g-hint" id="g9hint"></p>
   </div>
 </section>
 
-<!-- ۱۰ -->
+<!-- ========== ۱۰: آیینه جادویی ========== -->
 <section class="gate" id="gate10">
   <div class="gate-inner">
-    <h1 class="g-title">یه ستاره انتخاب کن ⭐</h1>
-    <p class="g-sub">و یه آرزو کن... آرزوهات قشنگن</p>
-    <div class="pick-stars">
-      <button class="pick-star">⭐</button>
-      <button class="pick-star">🌟</button>
-      <button class="pick-star">✨</button>
+    <h1 class="g-title">آیینه جادویی 🪞</h1>
+    <p class="g-sub">به آیینه نگاه کن و حقیقت رو ببین</p>
+    <div class="mirror-wrap" id="mirrorWrap">
+      <span class="mirror" id="mirror">🪞</span>
     </div>
-    <p class="g-hint" id="g10hint"></p>
+    <p class="g-hint" id="g10hint">روی آیینه بزن</p>
   </div>
 </section>
 
-<!-- ۱۱ -->
+<!-- ========== ۱۱: پر پرنیان ========== -->
 <section class="gate" id="gate11">
+  <div class="gate-inner">
+    <h1 class="g-title">پر پرنیان 🪶</h1>
+    <p class="g-sub">به پر فوت کن تا آرزوت به آسمون بره</p>
+    <div class="feather-wrap" id="featherWrap">
+      <span class="feather" id="feather">🪶</span>
+    </div>
+    <p class="g-hint" id="g11hint">روی پر بزن تا فوتش کنی</p>
+  </div>
+</section>
+
+<!-- ========== ۱۲: آرزو ستاره ========== -->
+<section class="gate" id="gate12">
+  <div class="gate-inner">
+    <h1 class="g-title">یه ستاره آرزو کن ⭐</h1>
+    <p class="g-sub">آرزوهات ستاره‌های آسمونن</p>
+    <div class="wish-stars">
+      <button class="wstar">⭐</button>
+      <button class="wstar">🌟</button>
+      <button class="wstar">✨</button>
+    </div>
+    <p class="g-hint" id="g12hint"></p>
+  </div>
+</section>
+
+<!-- ========== ۱۳: پازل ========== -->
+<section class="gate" id="gate13">
+  <div class="gate-inner">
+    <h1 class="g-title">پازل قصر 🧩</h1>
+    <p class="g-sub">همه‌ی خونه‌ها رو پر کن</p>
+    <div class="puzzle-grid" id="puzzleGrid"></div>
+    <p class="g-hint" id="g13hint">۰ از ۹</p>
+  </div>
+</section>
+
+<!-- ========== ۱۴: تنفس ========== -->
+<section class="gate" id="gate14">
   <div class="gate-inner">
     <div class="breath-circle"></div>
     <h1 class="g-title">نفس عمیق بکش...</h1>
-    <p class="g-sub">دم... بازدم... آروم ??️<br>حالا آماده‌ای</p>
-    <div class="btn-row"><button class="btn" id="g11btn">آماده‌ام</button></div>
+    <p class="g-sub">دم... بازدم... آروم 🌬️<br>حالا آماده‌ای</p>
+    <div class="btn-row"><button class="btn" id="g14btn">آماده‌ام</button></div>
   </div>
 </section>
 
-<!-- ۱۲ -->
-<section class="gate" id="gate12">
+<!-- ========== ۱۵: فینال ========== -->
+<section class="gate" id="gate15">
   <div class="gate-inner">
-    <div class="big-emoji">🌟</div>
-    <h1 class="g-title">همه‌چیز آماده‌ست</h1>
-    <p class="g-sub">هدیه‌ی تو، فقط یه کلیک فاصله داره</p>
-    <div class="btn-row"><button class="btn big" id="g12btn">هدیه رو نشونم بده 🎁</button></div>
+    <div class="big-emoji">👑</div>
+    <h1 class="g-title">قصر آماده‌ست</h1>
+    <p class="g-sub">هدیه‌ی سلطنتی تو، پشت این دره...</p>
+    <div class="btn-row"><button class="btn big" id="g15btn">در رو باز کن 🚪</button></div>
   </div>
 </section>
 
-<!-- هدیه -->
+<!-- ========== GIFT ========== -->
 <section id="gift">
   <div id="stage">
-    <svg id="glowHeart" xmlns="http://www.w3.org/2000/svg"></svg>
+    <svg id="goldHeart" xmlns="http://www.w3.org/2000/svg"></svg>
     <div id="heartWords"></div>
     <div id="mainText">
       <div class="l1">نغمه عزیزم</div>
@@ -342,8 +598,8 @@ body{font-family:'Vazirmatn',system-ui,sans-serif;background:#07030f;color:#fff;
 <div id="garden"></div>
 
 <div id="finalNote">
-  <p class="note1">🌸 هر روزت روز دختر باشه 🌸</p>
-  <p class="note2">با عشق، برای نغمه‌ی من 💗</p>
+  <p class="note1">👑 هر روزت روز دختر باشه، ملکه‌ی من 👑</p>
+  <p class="note2">با عشق، برای نغمه 💗</p>
   <button class="btn ghost" id="replay">از اول ببین 🔁</button>
 </div>
 
@@ -354,19 +610,16 @@ body{font-family:'Vazirmatn',system-ui,sans-serif;background:#07030f;color:#fff;
 <script>
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
-
-/* ========== تشخیص موبایل ========== */
 const IS_MOBILE = window.innerWidth < 700 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-/* ========== ستاره‌های پس‌زمینه ========== */
+/* ============ ستاره‌های پس‌زمینه ============ */
 (function(){
   const box = $('#stars'); const frag = document.createDocumentFragment();
-  const count = IS_MOBILE ? 90 : 150;
+  const count = IS_MOBILE ? 100 : 180;
   for(let i=0;i<count;i++){
-    const s = document.createElement('i'); s.className='star-dot';
-    s.style.left = (Math.random()*100)+'vw';
+    const s = document.createElement('i'); s.className='star-dot';s.style.left = (Math.random()*100)+'vw';
     s.style.top  = (Math.random()*100)+'vh';
-    const sz = Math.random()*2.2+0.8;
+    const sz = Math.random()*2.4+0.7;
     s.style.width = sz+'px'; s.style.height = sz+'px';
     s.style.animationDelay = (Math.random()*4)+'s';
     s.style.animationDuration = (2+Math.random()*4)+'s';
@@ -375,7 +628,7 @@ const IS_MOBILE = window.innerWidth < 700 || /Mobi|Android|iPhone|iPad/i.test(na
   box.appendChild(frag);
 })();
 
-/* ========== ناوبری ========== */
+/* ============ ناوبری ============ */
 const gateEls = $$('.gate');
 let cur = 0;
 function goTo(idx){
@@ -384,10 +637,10 @@ function goTo(idx){
   cur = idx;
   gateEls[cur].classList.add('active');
 }
-function toFa(n){ return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]); }
+const toFa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 $$('[data-goto]').forEach(b=> b.addEventListener('click', ()=> goTo(parseInt(b.dataset.goto,10))));
 
-/* ========== شمارش معکوس ========== */
+/* ============ شمارش معکوس ============ */
 function runCountdown(cb){
   const el = $('#countdown');
   const nums = ['۳','۲','۱']; let i = 0;
@@ -401,115 +654,145 @@ function runCountdown(cb){
   })();
 }
 
-/* ========== ۲ ========== */
+/* ============ ۱ - جعبه ============ */
+(function(){
+  const box = $('#goldBox');
+  box.addEventListener('click', ()=>{
+    box.classList.add('open'); box.textContent = '👑';
+    setTimeout(()=> goTo(1), 1000);
+  });
+})();
+
+/* ============ ۲ ============ */
 (function(){
   let n = 0;
   $('#g2yes').addEventListener('click', ()=> goTo(2));
   $('#g2no').addEventListener('click', ()=>{
     n++;
     const msgs = [
-      'باشه... ولی بدون یه چیز خیلی قشنگ منتظرته 👀',
-      'آخه نمی‌تونی نه بگی... دوباره فکر کن 🥺',
-      'نغمه جان، دلت نه نمی‌گه... ادامه بده 💗',
-      'باشه باشه، ولی یه بار دیگه امتحان کن 😅',
-      'قربونت برم، دیگه "نه" نزن... برو جلو 🌸'
+      'باشه... ولی توی قصر یه گنج خیلی قشنگ منتظرته 👑',
+      'نترس! قصر پر از جواهر و گل سرخه 🌹',
+      'نغمه جان، به من اعتماد کن... قصر مال توئه ✨',
+      'باشه باشه، ولی یه بار دیگه فکر کن 😊',
+      'قربونت برم، دیگه نه نگو... بیا تو قصر 💗'
     ];
     $('#g2msg').textContent = msgs[Math.min(n-1, msgs.length-1)];
     $('#char2').classList.remove('shake'); void $('#char2').offsetWidth;
     $('#char2').classList.add('shake');
-    if(n>=3){ $('#g2hint').textContent='راستی، دکمه‌ی "آره" خیلی قشنگ‌تره! 😄'; $('#g2hint').className='g-hint warn'; }
+    if(n>=3){ $('#g2hint').textContent='راستی، شمعدون‌ها منتظرن روشن شن! 🕯️'; $('#g2hint').className='g-hint warn'; }
   });
 })();
 
-/* ========== ۳ ========== */
+/* ============ ۳ ============ */
 (function(){
   $('#g3yes').addEventListener('click', ()=> goTo(3));
   $('#g3no').addEventListener('click', ()=>{
-    $('#g3hint').textContent = 'قول بده دیگه! 😤';
+    $('#g3hint').textContent = 'قول بده دیگه... تو ملکه‌ی قلبی 👑';
     $('#g3hint').className = 'g-hint warn';
   });
 })();
 
-/* ========== ۴ ========== */
+/* ============ ۴ - شمعدون ============ */
+(function(){
+  const candles = $$('#candelabra .candle');
+  const hint = $('#g4hint');
+  let lit = 0;
+  candles.forEach(c=> c.addEventListener('click', ()=>{
+    if(c.classList.contains('lit')) return;
+    c.classList.add('lit');
+    lit++;
+    hint.textContent = toFa(lit) + ' از ۷ روشن شده';
+    if(lit >= 7){
+      hint.textContent = 'قصر نورانی شد! ✨';
+      hint.className = 'g-hint ok';
+      setTimeout(()=> goTo(4), 900);
+    }
+  }));
+})();
+
+/* ============ ۵ - حافظ ============ */
+(function(){
+  const book = $('#hafezBook'), verse = $('#verse'), hint = $('#g5hint');
+  const couplets = [
+    ['دوش دیدم که ملائک در میخانه زدند', 'گل آدم بسرشتند و به پیمانه زدند'],
+    ['بیا که قصر امل سخت سست بنیادست', 'بیار باده که بنیاد عمر بر بادست'],
+    ['هر که را با خط سبزت سر سودا باشد', 'پای تا سر چو قلم سرخ به سر تا پا باشد'],
+    ['درخت دوستی بنشان که کام دل به بار آرد', 'نهال دشمنی برکن که رنج بی‌شمار آرد'],
+    ['رسید مژده که ایام غم نخواهد ماند', 'چنان نماند چنین نیز هم نخواهد ماند'],
+    ['ما در پیاله عکس رخ یار دیده‌ایم', 'ای بی‌خبر ز لذت شرب مدام ما']
+  ];
+  let done = false;
+  book.addEventListener('click', ()=>{
+    if(done) return; done = true;
+    book.classList.add('open');
+    const v = couplets[Math.floor(Math.random()*couplets.length)];
+    verse.innerHTML = `<span class="vline">${v[0]}</span><span class="vline">${v[1]}</span>`;
+    setTimeout(()=> verse.classList.add('on'), 400);
+    hint.textContent = 'این فال، برات یه پیام داره 💫';
+    hint.className = 'g-hint ok';
+    setTimeout(()=> goTo(5), 3200);
+  });
+})();
+
+/* ============ ۶ - گلاب‌پاش ============ */
 (function(){
   let cnt = 0; const max = 5;
-  const tap = $('#heartTap'), fill = $('#heartMeterFill'), hint = $('#g4hint');
-  tap.addEventListener('click', e=>{
+  const wrap = $('#rosewaterWrap'), fill = $('#rwMeterFill'), hint = $('#g6hint');
+  wrap.addEventListener('click', e=>{
     if(cnt>=max) return;
     cnt++;
     fill.style.width = (cnt/max*100)+'%';
-    hint.textContent = toFa(cnt) + ' از ' + toFa(max);const r = document.createElement('div');
-    r.className = 'pop-heart'; r.textContent = '💗';
-    r.style.left = e.clientX+'px'; r.style.top = e.clientY+'px';
-    document.body.appendChild(r);
-    setTimeout(()=> r.remove(), 1400);
+    hint.textContent = toFa(cnt) + ' از ' + toFa(max);
+    /* پخش گل و قطره */
+    const drops = ['🌹','🌸','💧','🌺'];
+    for(let i=0;i<4;i++){
+      const r = document.createElement('div');
+      r.className = 'drop-pop';
+      r.textContent = drops[Math.floor(Math.random()*drops.length)];
+      r.style.left = e.clientX+'px';
+      r.style.top = e.clientY+'px';
+      r.style.setProperty('--dx', (Math.random()*120-60)+'px');
+      r.style.setProperty('--dy', (-60-Math.random()*80)+'px');
+      r.style.animationDelay = (i*0.05)+'s';
+      document.body.appendChild(r);
+      setTimeout(()=> r.remove(), 1600);
+    }
     if(cnt>=max){
-      hint.textContent = 'قلبت پُر از عشقه! 💖';
+      hint.textContent = 'فضا پر از عطر گل شد! 🌹';
       hint.className = 'g-hint ok';
-      setTimeout(()=> goTo(4), 800);
+      setTimeout(()=> runCountdown(()=> goTo(6)), 1000);
     }
   });
 })();
 
-/* ========== ۵ ========== */
-(function(){
-  const btns = $$('#gate5 .flower-pick button');
-  const messages = {
-    rose: 'رز گفت: تو از هر گلی خوشبوتری 🌹',
-    tulip: 'لاله گفت: تو بهاری‌ترین فصل دنیایی 🌷',
-    blossom: 'شکوفه گفت: تو خودِ بهاری 🌸'
-  };
-  const hint = $('#g5hint'); let picked = false;
-  btns.forEach(b=> b.addEventListener('click', ()=>{
-    if(picked) return; picked = true;
-    b.classList.add('picked');
-    hint.textContent = messages[b.dataset.flower];
-    hint.className = 'g-hint ok';
-    setTimeout(()=> goTo(5), 1300);
-  }));
-})();
-
-/* ========== ۶ ========== */
-(function(){
-  let blown = false;
-  const flame = $('#flame'), hint = $('#g6hint');
-  $('#candle').addEventListener('click', ()=>{
-    if(blown) return; blown = true;
-    flame.classList.add('out');
-    hint.textContent = 'آرزوت برآورده بشه ✨';
-    hint.className = 'g-hint ok';
-    setTimeout(()=> runCountdown(()=> goTo(6)), 900);
-  });
-})();
-
-/* ========== ۷ ========== */
+/* ============ ۷ - معما ============ */
 (function(){
   const opts = $$('#gate7 .opt'), hint = $('#g7hint');
   let wrong = 0;
   opts.forEach(o=> o.addEventListener('click', ()=>{
     if(o.dataset.ok === '1'){
       o.classList.add('right');
-      hint.textContent = 'آفرین! درست حدس زدی 🌸';
+      hint.textContent = 'آفرین! تو خودت گنج قصر بودی 💎';
       hint.className = 'g-hint ok';
       setTimeout(()=> goTo(7), 900);
     } else {
       o.classList.add('wrong');
       setTimeout(()=> o.classList.remove('wrong'), 500);
       wrong++;
-      hint.textContent = wrong<2 ? 'نچ! دوباره فکر کن...' : 'یه راهنمایی: عزیزترین کس این هدیه 💗';
+      hint.textContent = wrong<2 ? 'نچ! بازم فکر کن...' : 'راهنمایی: کسی که این هدیه براشه 💗';
       hint.className = 'g-hint warn';
     }
   }));
 })();
 
-/* ========== ۸ ========== */
+/* ============ ۸ - قفل ============ */
 (function(){
   const input = $('#g8input'), btn = $('#g8btn'), hint = $('#g8hint');
   btn.addEventListener('click', ()=>{
     const v = input.value.trim();
     if(v.length < 2){ hint.textContent='یه اسم حداقل ۲ حرفی بنویس 😊'; hint.className='g-hint warn'; return; }
     if(/نغمه|naghme|naghame/i.test(v)){
-      hint.textContent = 'قفل باز شد! ✨'; hint.className='g-hint ok';
+      hint.textContent = 'قفل قصر باز شد! 👑'; hint.className='g-hint ok';
       setTimeout(()=> goTo(8), 700);
     } else {
       hint.textContent = 'این اسم اون اسم نیست... بازم امتحان کن 💗'; hint.className='g-hint warn';
@@ -518,47 +801,104 @@ function runCountdown(cb){
   input.addEventListener('keydown', e=>{ if(e.key==='Enter') btn.click(); });
 })();
 
-/* ========== ۹ ========== */
+/* ============ ۹ - جواهر ============ */
 (function(){
-  let opened = false;
-  const env = $('#envelope'), hint = $('#g9hint');
-  env.addEventListener('click', ()=>{
-    if(opened) return; opened = true;
-    env.classList.add('open');
-    setTimeout(()=>{ env.textContent = '💌'; }, 300);
-    hint.textContent = 'این نامه، فقط واسه تو نوشته شده 💗';
+  const gems = $$('.gem'), hint = $('#g9hint');
+  const msgs = {
+    ruby: 'یاقوت سرخ، نماد عشق و شجاعت — مثل خودت ❤️',
+    emerald: 'زمرد سبز، نماد رشد و امید — مثل قلبت 💚',
+    sapphire: 'فیروزه، سنگ خوشبختی ایرانی — تقدیم به تو 💙'
+  };
+  let picked = false;
+  gems.forEach(g=> g.addEventListener('click', ()=>{
+    if(picked) return; picked = true;
+    g.classList.add('picked');
+    hint.textContent = msgs[g.dataset.gem];
     hint.className = 'g-hint ok';
     setTimeout(()=> goTo(9), 1500);
-  });
-})();
-
-/* ========== ۱۰ ========== */
-(function(){
-  const stars = $$('#gate10 .pick-star'), hint = $('#g10hint');
-  let picked = false;
-  stars.forEach((s,i)=> s.addEventListener('click', ()=>{
-    if(picked) return; picked = true;
-    s.classList.add('chosen');
-    hint.textContent = ['آرزوی ستاره‌ی طلایی 🌟','آرزوی ستاره‌ی نورانی ⭐','آرزوی ستاره‌ی درخشان ✨'][i];
-    hint.className = 'g-hint ok';
-    setTimeout(()=> goTo(10), 1100);
   }));
 })();
 
-/* ========== ۱۱ و ۱۲ ========== */
-$('#g11btn').addEventListener('click', ()=> goTo(11));
-$('#g12btn').addEventListener('click', ()=> runCountdown(()=> startGift()));
+/* ============ ۱۰ - آیینه ============ */
+(function(){
+  let done = false;
+  const mirror = $('#mirror'), hint = $('#g10hint');
+  $('#mirrorWrap').addEventListener('click', ()=>{
+    if(done) return; done = true;
+    mirror.classList.add('revealed');
+    setTimeout(()=>{ mirror.textContent = '💖'; }, 500);
+    hint.textContent = 'آیینه گفت: قشنگ‌ترین دختر، خودتی ✨';
+    hint.className = 'g-hint ok';
+    setTimeout(()=> goTo(10), 1800);
+  });
+})();
 
-/* ========== ۴۰ زبان ========== */
+/* ============ ۱۱ - پر ============ */
+(function(){
+  let blown = false;
+  const feather = $('#feather'), hint = $('#g11hint');
+  $('#featherWrap').addEventListener('click', ()=>{
+    if(blown) return; blown = true;
+    feather.classList.add('blown');
+    hint.textContent = 'پر پرید و آرزوت رفت آسمون 🪶';
+    hint.className = 'g-hint ok';
+    setTimeout(()=> runCountdown(()=> goTo(11)), 1400);
+  });
+})();
+
+/* ============ ۱۲ - آرزو ستاره ============ */
+(function(){
+  const stars = $$('#gate12 .wstar'), hint = $('#g12hint');
+  let picked = false;
+  stars.forEach((s,i)=> s.addEventListener('click', ()=>{
+    if(picked) return; picked = true;
+    s.classList.add('picked');
+    hint.textContent = ['آرزوی ستاره‌ی طلایی 🌟','آرزوی ستاره‌ی نورانی ⭐','آرزوی ستاره‌ی درخشان ✨'][i];
+    hint.className = 'g-hint ok';
+    setTimeout(()=> goTo(12), 1100);
+  }));
+})();
+
+/* ============ ۱۳ - پازل ============ */
+(function(){
+  const grid = $('#puzzleGrid'), hint = $('#g13hint');
+  const symbols = ['👑','💎','🌹','✨','🌙','⭐','🦋','🌸','💖'];
+  const shuffle = [...symbols].sort(()=> Math.random()-0.5);
+  let done = 0;
+  shuffle.forEach((sym,i)=>{
+    const cell = document.createElement('div');
+    cell.className = 'puzzle-cell';
+    cell.textContent = '؟';
+    cell.addEventListener('click', ()=>{
+      if(cell.classList.contains('done')) return;
+      cell.classList.add('done');
+      cell.textContent = sym;
+      done++;
+      hint.textContent = toFa(done) + ' از ۹';
+      if(done >= 9){
+        hint.textContent = 'پازل کامل شد! 🧩✨';
+        hint.className = 'g-hint ok';
+        setTimeout(()=> goTo(13), 900);
+      }
+    });
+    grid.appendChild(cell);
+  });
+})();
+
+/* ============ ۱۴ و ۱۵ ============ */
+$('#g14btn').addEventListener('click', ()=> goTo(14));
+$('#g15btn').addEventListener('click', ()=> runCountdown(()=> startGift()));
+
+/* ============ ۴۰ پیام ============ */
 const GREETINGS = [
-  {txt:'نغمه عزیزم، روزت دختر مبارک', lang:'fa'},
+  {txt:'نغمه عزیزم، روز دختر مبارک', lang:'fa'},
   {txt:"Happy Daughter's Day, dear Naghmeh", lang:'en'},
   {txt:'نغمه العزیزة، عید بنت سعید', lang:'ar'},
   {txt:'Sevgili Naghmeh, mutlu kızlar günü', lang:'tr'},
   {txt:'Naghmeh chérie, bonne fête', lang:'fr'},
   {txt:'Naghmeh querida, feliz día', lang:'es'},
   {txt:'Liebe Naghmeh, schöner Tag', lang:'de'},
-  {txt:'Naghmeh cara, buonafesta', lang:'it'},
+  {txt:'Naghmeh cara, buona festa', lang:'it'},
   {txt:'Naghmeh, feliz Dia da Menina', lang:'pt'},
   {txt:'Нагме, с праздником', lang:'ru'},
   {txt:'Naghmeh、こんにちは', lang:'ja'},
@@ -593,7 +933,7 @@ const GREETINGS = [
   {txt:'Naghmeh, kumusta', lang:'tl'}
 ];
 
-/* ========== قلب پارامتریک ========== */
+/* ============ نقاط قلب ============ */
 const CX = 500, CY = 450, SCALE = 22;
 function heartPoint(t, r){
   const s = Math.sin(t), c = Math.cos(t);
@@ -602,29 +942,44 @@ function heartPoint(t, r){
   return { x: CX + r * x * SCALE, y: CY - r * y * SCALE };
 }
 
-/* ========== گل‌های بارانی ========== */
-function makeFlowers(){
+/* ============ باغ: گل رز + جرقه + اسلیمی ============ */
+function makeGarden(){
   const garden = $('#garden');
-  const emojis = ['🌸','🌷','🌹','💐','🌺','🏵️','🌻','💮','🪷','🌼','🌾','💖'];
-  const count = IS_MOBILE ? 55 : 90;
+  const floaters = ['🌹','🌹','🌸','🌺','💐','❁','❀','✿','❁','🌹','🏵️','🌷'];
+  const count = IS_MOBILE ? 70 : 110;
   for(let i=0;i<count;i++){
     const f = document.createElement('div');
-    f.className = 'flower';
+    f.className = 'float-el';
     const inner = document.createElement('span');
-    inner.className = 'flower-inner';
-    inner.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    inner.className = 'float-el-inner';
+    inner.textContent = floaters[Math.floor(Math.random()*floaters.length)];
     inner.style.fontSize = (14 + Math.random()*26)+'px';
+    inner.style.color = Math.random() > 0.5 ? '#ffd970' : '#ff8fb8';
     f.appendChild(inner);
     f.style.left = (Math.random()*100)+'vw';
-    f.style.animationDuration = (8 + Math.random()*10)+'s';
-    f.style.animationDelay = (-Math.random()*12)+'s';
+    f.style.animationDuration = (8 + Math.random()*11)+'s';
+    f.style.animationDelay = (-Math.random()*14)+'s';
     inner.style.animationDuration = (2 + Math.random()*2.5)+'s';
     inner.style.animationDelay = (-Math.random()*3)+'s';
     garden.appendChild(f);
   }
+  /* جرقه‌های طلایی */
+  const sparkCount = IS_MOBILE ? 25 : 45;
+  for(let i=0;i<sparkCount;i++){
+    const s = document.createElement('div');
+    s.className = 'spark';
+    s.textContent = ['✨','✦','✧','❋'][Math.floor(Math.random()*4)];
+    s.style.left = (Math.random()*100)+'vw';
+    s.style.top = (60 + Math.random()*40)+'vh';
+    s.style.fontSize = (10 + Math.random()*10)+'px';
+    s.style.setProperty('--dx', (Math.random()*120-60)+'px');
+    s.style.animationDuration = (8 + Math.random()*8)+'s';
+    s.style.animationDelay = (-Math.random()*12)+'s';
+    garden.appendChild(s);
+  }
 }
 
-/* ========== شروع هدیه ========== */
+/* ============ شروع هدیه ============ */
 let giftStarted = false;
 function startGift(){
   if(giftStarted) return;
@@ -632,36 +987,27 @@ function startGift(){
   gateEls[cur].classList.remove('active');
   $('#gift').classList.add('show');
 
-  /* ---- مقیاس: مرجع موبایل ۸۰۰، دسکتاپ ۱۰۰۰ ---- */
   function setScale(){
-    const ref = IS_MOBILE ? 800 : 1000;
-    const s = Math.min(window.innerWidth/ref, window.innerHeight/ref) * (IS_MOBILE ? 0.92 : 0.98);
+    const ref = IS_MOBILE ? 900 : 1000;
+    const s = Math.min(window.innerWidth/ref, window.innerHeight/ref) * (IS_MOBILE ? 0.95 : 1);
     $('#stage').style.setProperty('--stage-scale', s);
   }
   setScale();
   window.addEventListener('resize', ()=> setScale());
   window.addEventListener('orientationchange', ()=> setTimeout(setScale, 200));
 
-  /* ---- اندازه‌ی فونت پایه ---- */
-  const BASE_FS = IS_MOBILE ? 24 : 14;
+  const BASE_FS = IS_MOBILE ? 22 : 13;
 
-  /* ---- قلب کمرنگ SVG ---- */
-  const svg = $('#glowHeart');
+  /* قلب طلایی SVG */
+  const svg = $('#goldHeart');
   svg.setAttribute('viewBox','0 0 1000 1000');
   const NS = 'http://www.w3.org/2000/svg';
 
   const defs = document.createElementNS(NS,'defs');
-  const filt = document.createElementNS(NS,'filter');
-  filt.setAttribute('id','blurHeart');
-  const gb = document.createElementNS(NS,'feGaussianBlur');
-  gb.setAttribute('stdDeviation','18');
-  filt.appendChild(gb);
-  defs.appendChild(filt);
-
   const grad = document.createElementNS(NS,'radialGradient');
-  grad.setAttribute('id','heartGrad');
+  grad.setAttribute('id','heartGoldGrad');
   grad.setAttribute('cx','50%'); grad.setAttribute('cy','40%');
-  [['0%','rgba(255,150,200,0.85)'],['55%','rgba(255,80,150,0.55)'],['100%','rgba(180,30,120,0.15)']].forEach(([o,c])=>{
+  [['0%','rgba(255,240,180,0.9)'],['45%','rgba(255,200,80,0.6)'],['100%','rgba(200,80,40,0.1)']].forEach(([o,c])=>{
     const st = document.createElementNS(NS,'stop');
     st.setAttribute('offset',o); st.setAttribute('stop-color',c);
     grad.appendChild(st);
@@ -676,14 +1022,14 @@ function startGift(){
     d += (i===0?'M ':'L ') + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ' ';
   }
   d += 'Z';
+
   const path = document.createElementNS(NS,'path');
   path.setAttribute('d', d);
-  path.setAttribute('fill','url(#heartGrad)');
-  path.setAttribute('filter','url(#blurHeart)');
+  path.setAttribute('fill','url(#heartGoldGrad)');
   path.setAttribute('opacity','0.55');
   svg.appendChild(path);
 
-  /* ---- ساخت متن‌های قلب توپر (۴۰ متن در ۴ حلقه) ---- */
+  /* ۴۰ متن در ۴ حلقه */
   const heartWords = $('#heartWords');
   const sorted = [...GREETINGS].sort((a,b)=> b.txt.length - a.txt.length);
 
@@ -706,7 +1052,7 @@ function startGift(){
 
       let fs = ring.fs;
       if(g.lang === 'fa') fs = ring.fs + (IS_MOBILE ? 3 : 2);
-      if(g.txt.length > 28) fs = Math.max(IS_MOBILE ? 14 : 8, fs - 2);
+      if(g.txt.length > 28) fs = Math.max(IS_MOBILE ? 13 : 8, fs - 2);
 
       el.style.fontSize = fs + 'px';
       el.style.left = p.x + 'px';
@@ -720,12 +1066,11 @@ function startGift(){
 
       el.dataset.rot = rot.toFixed(2);
       el.style.transform = `translate(-50%,-50%) translateY(22px) scale(.78) rotate(${rot}deg)`;
-
       heartWords.appendChild(el);
     }
   });
 
-  /* ---- ظاهر شدن دونه دونه ---- */
+  /* ظاهر شدن دونه دونه */
   const wordEls = Array.from(heartWords.children);
   const delayStart = 500;
   const perWord = IS_MOBILE ? 80 : 95;
@@ -733,46 +1078,43 @@ function startGift(){
     setTimeout(()=>{
       el.classList.add('on');
       el.style.transform = `translate(-50%,-50%) translateY(0) scale(1) rotate(${el.dataset.rot}deg)`;
-    }, delayStart + i*perWord);
-  });
+    }, delayStart + i*perWord);});
 
   const totalWords = delayStart + wordEls.length*perWord + 700;
 
-  /* ---- بعد از اتمام: فلش طلایی + متن بزرگ + قلب کمرنگ + گل‌ها ---- */
   setTimeout(()=>{
-    /* برق طلایی */
+    /* فلش طلایی */
     $('#flash').classList.add('go');
     $('#sweep').classList.add('go');
     setTimeout(()=>{
       $('#flash').classList.remove('go');
       $('#sweep').classList.remove('go');
-    }, 1700);
+    }, 1800);
 
-    /* متن فارسی بزرگ وسط - اندازه بر اساس موبایل/دسکتاپ */
+    /* متن فارسی بزرگ */
     const t1 = $('#mainText .l1');
     const t2 = $('#mainText .l2');
     if(IS_MOBILE){
-      t1.style.fontSize = '92px';
-      t2.style.fontSize = '72px';
+      t1.style.fontSize = '86px';
+      t2.style.fontSize = '52px';
       $('#mainText').style.top = '46%';
     } else {
       t1.style.fontSize = '80px';
-      t2.style.fontSize = '62px';
+      t2.style.fontSize = '48px';
     }
     setTimeout(()=> $('#mainText').classList.add('on'), 250);
 
-    /* قلب کمرنگ پشت با تپش */
-    setTimeout(()=> $('#glowHeart').classList.add('on'), 700);
+    /* قلب طلایی پشت */
+    setTimeout(()=> $('#goldHeart').classList.add('on'), 700);
 
-    /* گل‌های بارانی */
-    setTimeout(()=> makeFlowers(), 1100);
+    /* گل رز + جرقه + اسلیمی */
+    setTimeout(()=> makeGarden(), 1200);
 
     /* یادداشت پایین */
-    setTimeout(()=> $('#finalNote').classList.add('on'), 2600);
+    setTimeout(()=> $('#finalNote').classList.add('on'), 2800);
   }, totalWords);
 }
 
-/* ========== ریست ========== */
 $('#replay').addEventListener('click', ()=> location.reload());
 </script>
 </body>
